@@ -1,11 +1,13 @@
 ﻿using Assets.Code.Classes.Stats;
 using UnityEngine;
-using System.Linq;
 
 namespace Assets.Code.Scripts {
     public class Player : MonoBehaviour {
         public Item Weapon, Shield;
         public PlayerStats Stats;
+        public Camera Camera;
+
+        public SpriteRenderer WeaponSprite, ShieldSprite;
 
         public void Start() {
             this.Stats = new();
@@ -23,11 +25,13 @@ namespace Assets.Code.Scripts {
                     this.Weapon.Stats.Attributes.ForEach(attribute => this.Stats.RemoveAttribute(attribute));
                 }
                 this.Weapon = item;
+                this.WeaponSprite.sprite = item.Sprite;
             } else if (item.ItemType == ItemType.Shield) {
                 if (this.Shield != null) {
                     this.Shield.Stats.Attributes.ForEach(attribute => this.Stats.RemoveAttribute(attribute));
                 }
                 this.Shield = item;
+                this.ShieldSprite.sprite = item.Sprite;
             }
 
             item.Stats.Attributes.ForEach(attribute => this.Stats.AddAttribute(attribute));

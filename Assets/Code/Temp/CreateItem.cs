@@ -8,6 +8,7 @@ namespace Assets.Code.Temp {
 
         private ItemSelectionPanel ItemSelectionPanelPrefab;
         private Item ItemPrefab;
+        public Sprite KeepItemSprite, TakeItemSprite;
 
         public void Start() {
             this.ItemSelectionPanelPrefab = Resources.Load<ItemSelectionPanel>("Prefabs/ItemSelectionPanel");
@@ -39,6 +40,8 @@ namespace Assets.Code.Temp {
             ItemSelectionPanel itemSelectionPanel = Instantiate(this.ItemSelectionPanelPrefab);
             yield return new WaitUntil(() => itemSelectionPanel.IsInitialized);
 
+
+            itemSelectionPanel.GetComponent<RectTransform>().localScale = new(1, 1, 1);
             itemSelectionPanel.GetComponent<RectTransform>().localPosition = new();
 
             //this.ItemPanel.Item = newItem;

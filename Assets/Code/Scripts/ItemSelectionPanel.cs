@@ -20,11 +20,13 @@ namespace Assets.Code.Scripts {
 
             this.ItemPanelPrefab.Parent = this.transform;
 
-            this.ItemPanelPrefab.Item = this.CurrentItem;
             this.CurrentItemPanel = null;
             this.NewItemPanel = null;
 
 
+            this.ItemPanelPrefab.Item = this.CurrentItem;
+            this.ItemPanelPrefab.KeepItemButton.SetActive(true);
+            this.ItemPanelPrefab.TakeItemButton.SetActive(false);
             this.CurrentItemPanel = Instantiate(this.ItemPanelPrefab);
             this.CurrentItemPanel.SelectBox.GetComponent<EventTrigger>()
                 .triggers.Find(trigger => trigger.eventID.Equals(EventTriggerType.PointerClick))
@@ -36,6 +38,8 @@ namespace Assets.Code.Scripts {
                 });
 
             this.ItemPanelPrefab.Item = this.NewItem;
+            this.ItemPanelPrefab.KeepItemButton.SetActive(false);
+            this.ItemPanelPrefab.TakeItemButton.SetActive(true);
             this.NewItemPanel = Instantiate(this.ItemPanelPrefab);
             this.NewItemPanel.SelectBox.GetComponent<EventTrigger>()
                 .triggers.Find(trigger => trigger.eventID.Equals(EventTriggerType.PointerClick))

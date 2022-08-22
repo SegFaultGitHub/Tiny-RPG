@@ -22,6 +22,7 @@ namespace Assets.Code.Scripts {
         public TMP_Text LuckText, LuckValue;
 
         public GameObject SelectBox;
+        public GameObject KeepItemButton, TakeItemButton;
 
         [HideInInspector] public bool IsInitialized = false;
         private bool AnimationBlocked = false;
