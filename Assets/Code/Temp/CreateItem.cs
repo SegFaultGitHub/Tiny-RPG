@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace Assets.Code.Temp {
     public class CreateItem : MonoBehaviour {
-        public Item Item;
         public Player Player;
 
         private ItemSelectionPanel ItemSelectionPanelPrefab;
+        private Item ItemPrefab;
 
         public void Start() {
             this.ItemSelectionPanelPrefab = Resources.Load<ItemSelectionPanel>("Prefabs/ItemSelectionPanel");
+            this.ItemPrefab = Resources.Load<Item>("Prefabs/Item");
         }
 
         public void Run() {
@@ -18,9 +19,9 @@ namespace Assets.Code.Temp {
         }
 
         public IEnumerator RunCoroutine() {
-            this.Item.Level = Random.Range(1, 21);
-            this.Item.Parent = this.transform.parent;
-            Item newItem = Instantiate(this.Item);
+            this.ItemPrefab.Level = Random.Range(1, 21);
+            this.ItemPrefab.Parent = this.transform.parent;
+            Item newItem = Instantiate(this.ItemPrefab);
             yield return new WaitUntil(() => newItem.IsInitialized);
 
             Item currentItem = null;
@@ -35,7 +36,10 @@ namespace Assets.Code.Temp {
             this.ItemSelectionPanelPrefab.NewItem = newItem;
             this.ItemSelectionPanelPrefab.Parent = this.transform.parent;
 
-            Instantiate(this.ItemSelectionPanelPrefab);
+            ItemSelectionPanel itemSelectionPanel = Instantiate(this.ItemSelectionPanelPrefab);
+            yield return new WaitUntil(() => itemSelectionPanel.IsInitialized);
+
+            itemSelectionPanel.GetComponent<RectTransform>().localPosition = new();
 
             //this.ItemPanel.Item = newItem;
             //this.ItemPanel.Parent = this.transform.parent;

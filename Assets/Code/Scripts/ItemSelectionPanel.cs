@@ -11,6 +11,7 @@ namespace Assets.Code.Scripts {
         public ItemPanel ItemPanelPrefab;
 
         [HideInInspector] public Transform Parent;
+        [HideInInspector] public bool IsInitialized = false;
 
         private ItemPanel CurrentItemPanel, NewItemPanel;
 
@@ -60,6 +61,7 @@ namespace Assets.Code.Scripts {
             this.NewItemPanel.GetComponent<RectTransform>().anchoredPosition = new(this.CurrentItemPanel.GetComponent<RectTransform>().sizeDelta.x + 100, 0);
 
             this.OpenWindows();
+            this.IsInitialized = true;
         }
 
         private void DisableButtons() {
