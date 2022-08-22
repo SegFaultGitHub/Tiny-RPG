@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3648883152014813251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489144092812600727}
+  - component: {fileID: -5693195853868925023}
+  m_Layer: 0
+  m_Name: Item
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489144092812600727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648883152014813251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5693195853868925023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648883152014813251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0eaffdf87af944fa171c930554ff89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats:
+    Attributes: []
+  Name: 
+  Sprite: {fileID: 0}
+  Level: 17
+  WeaponSprites:
+  - {fileID: -1248511376, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: -350833998, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: 1526311782, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: -1675691898, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: -312242330, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: 373775329, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: 35703983, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: 191666411, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: 1968726270, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: 1724020742, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: -631334091, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  ShieldSprites:
+  - {fileID: 2012163653, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  - {fileID: 354810405, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
+  Parent: {fileID: 0}
