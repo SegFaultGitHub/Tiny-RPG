@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 1279983779}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7904494068356793557}
@@ -115,7 +115,7 @@ RectTransform:
   m_GameObject: {fileID: 1421844254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 129096375758702675}
@@ -252,55 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4e787aae159f84c8457e3b170576d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementControl:
-    m_Name: Movement Control
-    m_Type: 0
-    m_ExpectedControlType: Stick
-    m_Id: 521ef78d-2a8c-4e38-b305-3fc07c4d5611
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: 47e07f78-8169-4c15-91ef-fe21f409f1fa
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Movement Control
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 832d41cc-491f-47c3-b9a4-7671e9d02e30
-      m_Path: <Gamepad>/leftStick/up
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Movement Control
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 4732ab91-a35d-4126-9e38-f763a2b57ae5
-      m_Path: <Gamepad>/leftStick/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Movement Control
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 33203713-8e8e-459a-945a-29930d2e29b8
-      m_Path: <Gamepad>/leftStick/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Movement Control
-      m_Flags: 8
-    - m_Name: right
-      m_Id: bbf0b0ec-b9d3-44d6-9a59-d5c3ba897ee6
-      m_Path: <Gamepad>/leftStick/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Movement Control
-      m_Flags: 8
-    m_Flags: 0
   MovementSpeed: 4
   Sprite: {fileID: 0}
   Rigidbody: {fileID: 0}
@@ -318,7 +269,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000023841858, y: -0.3678841}
+  m_Offset: {x: 0.00000023841858, y: -0.35671782}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -329,7 +280,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7797699, y: 0.2642318}
+  m_Size: {x: 0.7797699, y: 0.25814104}
   m_EdgeRadius: 0
 --- !u!50 &6729917522618432027
 Rigidbody2D:

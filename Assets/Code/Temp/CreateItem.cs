@@ -9,7 +9,23 @@ namespace Assets.Code.Temp {
 
         private ItemSelectionPanel ItemSelectionPanelPrefab;
         private Item ItemPrefab;
-        public Sprite KeepItemSprite, TakeItemSprite;
+
+        private UIActions UIActions;
+
+        private void OnEnable() {
+            this.UIActions = new UIActions();
+            this.UIActions.Debug.Enable();
+
+            this.UIActions.Debug.CreateItems.started += this.Run;
+            this.UIActions.Debug.CreateItems.started += this.Run;
+        }
+
+        private void OnDisable() {
+            this.UIActions.Debug.CreateItems.started -= this.Run;
+            this.UIActions.Debug.CreateItems.started -= this.Run;
+
+            this.UIActions.Debug.Enable();
+        }
 
         private UIActions UIActions;
 
