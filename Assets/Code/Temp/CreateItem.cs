@@ -9,7 +9,6 @@ namespace Assets.Code.Temp {
 
         private ItemSelectionPanel ItemSelectionPanelPrefab;
         private Item ItemPrefab;
-        public Sprite KeepItemSprite, TakeItemSprite;
 
         private UIActions UIActions;
 
