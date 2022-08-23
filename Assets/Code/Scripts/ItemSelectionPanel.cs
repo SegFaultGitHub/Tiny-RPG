@@ -38,12 +38,10 @@ namespace Assets.Code.Scripts {
         }
 
         private void KeepItemInput(InputAction.CallbackContext _) {
-            this.DisableActions();
             this.KeepItem();
         }
 
         private void TakeItemInput(InputAction.CallbackContext _) {
-            this.DisableActions();
             this.TakeItem();
         }
         #endregion
@@ -56,10 +54,15 @@ namespace Assets.Code.Scripts {
             this.CurrentItemPanel = null;
             this.NewItemPanel = null;
 
+
             this.ItemPanelPrefab.Item = this.CurrentItem;
+            this.ItemPanelPrefab.KeepItemButton.SetActive(true);
+            this.ItemPanelPrefab.TakeItemButton.SetActive(false);
             this.CurrentItemPanel = Instantiate(this.ItemPanelPrefab);
 
             this.ItemPanelPrefab.Item = this.NewItem;
+            this.ItemPanelPrefab.KeepItemButton.SetActive(false);
+            this.ItemPanelPrefab.TakeItemButton.SetActive(true);
             this.NewItemPanel = Instantiate(this.ItemPanelPrefab);
 
             yield return new WaitUntil(() => this.CurrentItemPanel.IsInitialized && this.NewItemPanel.IsInitialized);
@@ -82,6 +85,7 @@ namespace Assets.Code.Scripts {
         }
 
         private void KeepItem() {
+            this.DisableActions();
             Destroy(this.NewItem.gameObject);
             this.CurrentItemPanel.AnimateSelectButton()
                 .setOnComplete(() => {
@@ -90,6 +94,7 @@ namespace Assets.Code.Scripts {
         }
 
         private void TakeItem() {
+            this.DisableActions();
             this.Player.Equip(this.NewItem);
             if (this.CurrentItem != null) { Destroy(this.CurrentItem.gameObject); }
             this.NewItemPanel.AnimateSelectButton()
@@ -102,7 +107,7 @@ namespace Assets.Code.Scripts {
         private LTDescr OpenWindows() {
             const float animationDuration = 0.3f;
 
-            if (this.CurrentItem == null) {
+            if (!this.CurrentItemPanel.enabled) {
                 return this.NewItemPanel.Open();
             } else {
                 return this.CurrentItemPanel.Open()
@@ -116,12 +121,12 @@ namespace Assets.Code.Scripts {
         private LTDescr CloseWindows(ItemPanel first, ItemPanel second) {
             const float animationDuration = 0.3f;
 
-            if (first.Item == null) {
+            if (!first.enabled) {
                 return second.Close()
                     .setOnComplete(() => {
                         Destroy(this.gameObject);
                     });
-            } else if (second.Item == null) {
+            } else if (!second.enabled) {
                 return first.Close()
                     .setOnComplete(() => {
                         Destroy(this.gameObject);

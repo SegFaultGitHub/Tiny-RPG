@@ -22,6 +22,7 @@ namespace Assets.Code.Scripts {
         public TMP_Text LuckText, LuckValue;
 
         public GameObject SelectBox;
+        public GameObject KeepItemButton, TakeItemButton;
 
         [HideInInspector] public bool IsInitialized = false;
         private bool AnimationBlocked = false;
@@ -84,9 +85,8 @@ namespace Assets.Code.Scripts {
             if (this.AnimationBlocked) { return new(); }
             this.AnimationBlocked = true;
             float y = this.SelectBox.transform.GetComponent<RectTransform>().localPosition.y;
-            return LeanTween.moveLocalY(this.SelectBox.gameObject, y - 4, 0.02f).setOnComplete(() => {
-                LeanTween.moveLocalY(this.SelectBox.gameObject, y, 0.02f).setOnComplete(() => this.AnimationBlocked = false);
-            });
+
+            return LeanTween.moveLocalY(this.SelectBox.gameObject, y - 4, 0.05f).setLoopPingPong(1);
         }
 
         public void SetAttributeValueColors(Item item) {

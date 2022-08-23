@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2241087187181609362}
   - component: {fileID: 7210162488173506187}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ItemSelectionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dae0008a999bc64b83304e85b40bbc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemPanelPrefab: {fileID: 8465452490098934623, guid: b42c82e05463dcf4391c62fe6b4aa6d1, type: 3}
   Player: {fileID: 0}
   CurrentItem: {fileID: 0}
   NewItem: {fileID: 0}
+  ItemPanelPrefab: {fileID: 8465452490098934623, guid: b42c82e05463dcf4391c62fe6b4aa6d1, type: 3}
+  Parent: {fileID: 0}
+  IsInitialized: 0
