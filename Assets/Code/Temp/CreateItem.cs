@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Scripts;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Assets.Code.Temp {
     public class CreateItem : MonoBehaviour {
@@ -9,12 +10,29 @@ namespace Assets.Code.Temp {
         private ItemSelectionPanel ItemSelectionPanelPrefab;
         private Item ItemPrefab;
 
+        private UIActions UIActions;
+
+        private void OnEnable() {
+            this.UIActions = new UIActions();
+            this.UIActions.Debug.Enable();
+
+            this.UIActions.Debug.CreateItems.started += this.Run;
+            this.UIActions.Debug.CreateItems.started += this.Run;
+        }
+
+        private void OnDisable() {
+            this.UIActions.Debug.CreateItems.started -= this.Run;
+            this.UIActions.Debug.CreateItems.started -= this.Run;
+
+            this.UIActions.Debug.Enable();
+        }
+
         public void Start() {
             this.ItemSelectionPanelPrefab = Resources.Load<ItemSelectionPanel>("Prefabs/ItemSelectionPanel");
             this.ItemPrefab = Resources.Load<Item>("Prefabs/Item");
         }
 
-        public void Run() {
+        public void Run(InputAction.CallbackContext _) {
             this.StartCoroutine(this.RunCoroutine());
         }
 
