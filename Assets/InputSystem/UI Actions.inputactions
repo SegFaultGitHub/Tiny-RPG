@@ -1,0 +1,82 @@
+{
+    "name": "UI Actions",
+    "maps": [
+        {
+            "name": "Item Selection",
+            "id": "3f2e9d9c-1e0c-47cd-8d53-25eb742c67f0",
+            "actions": [
+                {
+                    "name": "Keep Item",
+                    "type": "Button",
+                    "id": "7395ae88-96fa-4421-b063-5dc130359f27",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Take Item",
+                    "type": "Button",
+                    "id": "45072eaa-9d1d-4958-b6f1-fc5acb424125",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a1ede83c-f5f8-4a71-ab83-cfd1ad2776be",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Keep Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f87f2c11-a4a7-4be3-b201-bca5fd89e24b",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Take Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "dbb820f4-1c73-4f27-8239-ed05a0273599",
+            "actions": [
+                {
+                    "name": "Create Items",
+                    "type": "Button",
+                    "id": "0566baab-cd20-4d05-98a4-db8f6f96193b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "64479b64-5abd-4dfe-84d2-2f0f395cb238",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Create Items",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

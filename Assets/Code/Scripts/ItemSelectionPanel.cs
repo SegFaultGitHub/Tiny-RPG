@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 namespace Assets.Code.Scripts {
     public class ItemSelectionPanel : MonoBehaviour {
@@ -14,6 +15,38 @@ namespace Assets.Code.Scripts {
         [HideInInspector] public bool IsInitialized = false;
 
         private ItemPanel CurrentItemPanel, NewItemPanel;
+        private UIActions UIActions;
+
+        #region Input
+        private void EnableActions() {
+            this.UIActions = new UIActions();
+            this.UIActions.ItemSelection.Enable();
+
+            this.UIActions.ItemSelection.KeepItem.started += this.KeepItemInput;
+            this.UIActions.ItemSelection.TakeItem.started += this.TakeItemInput;
+        }
+
+        private void OnDisable() {
+            this.DisableActions();
+        }
+
+        private void DisableActions() {
+            this.UIActions.ItemSelection.KeepItem.started -= this.KeepItemInput;
+            this.UIActions.ItemSelection.TakeItem.started -= this.TakeItemInput;
+
+            this.UIActions.ItemSelection.Disable();
+        }
+
+        private void KeepItemInput(InputAction.CallbackContext _) {
+            this.DisableActions();
+            this.KeepItem();
+        }
+
+        private void TakeItemInput(InputAction.CallbackContext _) {
+            this.DisableActions();
+            this.TakeItem();
+        }
+        #endregion
 
         public IEnumerator Start() {
             if (this.transform.parent == null) { this.transform.SetParent(this.Parent); }
@@ -28,29 +61,13 @@ namespace Assets.Code.Scripts {
             this.ItemPanelPrefab.KeepItemButton.SetActive(true);
             this.ItemPanelPrefab.TakeItemButton.SetActive(false);
             this.CurrentItemPanel = Instantiate(this.ItemPanelPrefab);
-            this.CurrentItemPanel.SelectBox.GetComponent<EventTrigger>()
-                .triggers.Find(trigger => trigger.eventID.Equals(EventTriggerType.PointerClick))
-                .callback.AddListener((_) => {
-                    this.DisableButtons();
-                    // Pass
-                    Destroy(this.NewItem.gameObject);
-                    this.CloseWindows(this.CurrentItemPanel, this.NewItemPanel);
-                });
 
             this.ItemPanelPrefab.Item = this.NewItem;
             this.ItemPanelPrefab.KeepItemButton.SetActive(false);
             this.ItemPanelPrefab.TakeItemButton.SetActive(true);
             this.NewItemPanel = Instantiate(this.ItemPanelPrefab);
-            this.NewItemPanel.SelectBox.GetComponent<EventTrigger>()
-                .triggers.Find(trigger => trigger.eventID.Equals(EventTriggerType.PointerClick))
-                .callback.AddListener((_) => {
-                    this.DisableButtons();
-                    this.Player.Equip(this.NewItem);
-                    if (this.CurrentItem != null) { Destroy(this.CurrentItem.gameObject); }
-                    this.CloseWindows(this.NewItemPanel, this.CurrentItemPanel);
-                });
 
-            yield return new WaitUntil(() => (this.CurrentItemPanel == null || this.CurrentItemPanel.IsInitialized) && this.NewItemPanel.IsInitialized);
+            yield return new WaitUntil(() => this.CurrentItemPanel.IsInitialized && this.NewItemPanel.IsInitialized);
 
             this.CurrentItemPanel.SetAttributeValueColors(this.NewItem);
             this.NewItemPanel.SetAttributeValueColors(this.CurrentItem);
@@ -66,41 +83,65 @@ namespace Assets.Code.Scripts {
 
             this.OpenWindows();
             this.IsInitialized = true;
+            this.EnableActions();
         }
 
-        private void DisableButtons() {
-            this.CurrentItemPanel.SelectBox.GetComponent<EventTrigger>()
-                .triggers.Find(trigger => trigger.eventID.Equals(EventTriggerType.PointerClick))
-                .callback.RemoveAllListeners();
-            this.NewItemPanel.SelectBox.GetComponent<EventTrigger>()
-                .triggers.Find(trigger => trigger.eventID.Equals(EventTriggerType.PointerClick))
-                .callback.RemoveAllListeners();
+        private void KeepItem() {
+            Destroy(this.NewItem.gameObject);
+            this.CurrentItemPanel.AnimateSelectButton()
+                .setOnComplete(() => {
+                    this.CloseWindows(this.CurrentItemPanel, this.NewItemPanel);
+                });
         }
 
-        private void OpenWindows() {
+        private void TakeItem() {
+            this.Player.Equip(this.NewItem);
+            if (this.CurrentItem != null) { Destroy(this.CurrentItem.gameObject); }
+            this.NewItemPanel.AnimateSelectButton()
+                .setOnComplete(() => {
+                    this.CloseWindows(this.NewItemPanel, this.CurrentItemPanel);
+                });
+        }
+
+        #region Animation
+        private LTDescr OpenWindows() {
             const float animationDuration = 0.3f;
 
             if (this.CurrentItem == null) {
-                this.NewItemPanel.Open();
+                return this.NewItemPanel.Open();
             } else {
-                this.CurrentItemPanel.Open().setOnStart(() => {
-                    this.NewItemPanel.Open().setDelay(animationDuration / 2);
-                });
+                return this.CurrentItemPanel.Open()
+                    .setOnStart(() => {
+                        this.NewItemPanel.Open()
+                            .setDelay(animationDuration / 2);
+                        });
             }
         }
 
-        private void CloseWindows(ItemPanel first, ItemPanel second) {
+        private LTDescr CloseWindows(ItemPanel first, ItemPanel second) {
             const float animationDuration = 0.3f;
 
             if (first.Item == null) {
-                second.Close().setOnComplete(() => Destroy(this.gameObject));
+                return second.Close()
+                    .setOnComplete(() => {
+                        Destroy(this.gameObject);
+                    });
             } else if (second.Item == null) {
-                first.Close().setOnComplete(() => Destroy(this.gameObject));
+                return first.Close()
+                    .setOnComplete(() => {
+                        Destroy(this.gameObject);
+                    });
             } else {
-                first.Close().setOnStart(() => {
-                    second.Close().setDelay(animationDuration / 2).setOnComplete(() => Destroy(this.gameObject));
-                });
+                return first.Close()
+                    .setOnStart(() => {
+                        second.Close()
+                            .setDelay(animationDuration / 2)
+                            .setOnComplete(() => {
+                                Destroy(this.gameObject);
+                            });
+                    });
             }
         }
+        #endregion Animation
     }
 }

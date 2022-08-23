@@ -81,11 +81,11 @@ namespace Assets.Code.Scripts {
             this.IsInitialized = true;
         }
 
-        public void AnimateSelectButton() {
-            if (this.AnimationBlocked) { return; }
+        public LTDescr AnimateSelectButton() {
+            if (this.AnimationBlocked) { return new(); }
             this.AnimationBlocked = true;
             float y = this.SelectBox.transform.GetComponent<RectTransform>().localPosition.y;
-            LeanTween.moveLocalY(this.SelectBox.gameObject, y - 4, 0.02f).setOnComplete(() => {
+            return LeanTween.moveLocalY(this.SelectBox.gameObject, y - 4, 0.02f).setOnComplete(() => {
                 LeanTween.moveLocalY(this.SelectBox.gameObject, y, 0.02f).setOnComplete(() => this.AnimationBlocked = false);
             });
         }
