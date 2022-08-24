@@ -42,5 +42,9 @@ namespace Assets.Code.Scripts.Player {
 
             item.Stats.Attributes.ForEach(attribute => this.Stats.AddAttribute(attribute));
         }
+
+        public void PerformAttack() {
+            Debug.Log("Perform attack");
+        }
     }
 }

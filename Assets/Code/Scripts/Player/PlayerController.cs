@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,12 +8,15 @@ namespace Assets.Code.Scripts.Player {
             Left, Right
         }
 
-        [SerializeField] private float MovementSpeed;
+        public float AttackDelay;
 
-        [SerializeField] private SpriteRenderer Sprite;
+        private Player Player;
+
+        [SerializeField] private float MovementSpeed;
         [SerializeField] private Rigidbody2D Rigidbody;
         [SerializeField] private Vector2 MovementDirection;
 
+        private float LastAttack = float.MinValue;
         private PlayerActions PlayerActions;
         private Animator Animator;
         private PlayerDirection Direction;
@@ -47,9 +51,9 @@ namespace Assets.Code.Scripts.Player {
         #endregion
 
         public void Start() {
+            this.Player = this.GetComponent<Player>();
             this.Animator = this.GetComponent<Animator>();
             this.Rigidbody = this.GetComponentInChildren<Rigidbody2D>();
-            this.Sprite = this.GetComponentInChildren<SpriteRenderer>();
 
             if (this.transform.localScale.x > 0) {
                 this.Direction = PlayerDirection.Right;
@@ -64,33 +68,28 @@ namespace Assets.Code.Scripts.Player {
 
         private void Move(Vector2 direction) {
             this.MovementDirection = direction;
-            if (this.MovementDirection.x < 0 && this.Direction == PlayerDirection.Right) {
+            if (this.MovementDirection.x < -0.15f && this.Direction == PlayerDirection.Right && !this.Animator.GetBool("Flipping")) {
                 this.Direction = PlayerDirection.Left;
-                this.Animator.SetBool("FlipLeft", true);
-                this.Animator.SetBool("FlipRight", false);
-            } else if (this.MovementDirection.x > 0 && this.Direction == PlayerDirection.Left) {
+                this.Animator.SetBool("Flipping", true);
+            } else if (this.MovementDirection.x > 0.15f && this.Direction == PlayerDirection.Left && !this.Animator.GetBool("Flipping")) {
                 this.Direction = PlayerDirection.Right;
-                this.Animator.SetBool("FlipRight", true);
-                this.Animator.SetBool("FlipLeft", false);
+                this.Animator.SetBool("Flipping", true);
             }
             
             this.Animator.SetBool("IsMoving", direction != Vector2.zero);
         }
 
         private void Attack() {
-            this.Animator.SetTrigger("Attack");
+            float now = Time.time;
+            if (now - this.LastAttack > this.AttackDelay) {
+                this.Animator.SetTrigger("Attack");
+                this.LastAttack = now;
+            }
         }
 
-        public void FlipLeft() {
-            //this.transform.localScale = new(-1, this.transform.localScale.y, this.transform.localScale.z);
-            this.Animator.SetBool("FlipRight", false);
-            this.Animator.SetBool("FlipLeft", false);
-        }
-
-        public void FlipRight() {
-            //this.transform.localScale = new(1, this.transform.localScale.y, this.transform.localScale.z);
-            this.Animator.SetBool("FlipRight", false);
-            this.Animator.SetBool("FlipLeft", false);
+        public void Flip() {
+            this.transform.localScale = new(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
+            this.Animator.SetBool("Flipping", false);
         }
     }
 }
