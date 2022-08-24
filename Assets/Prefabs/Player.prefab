@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1279983780}
   - component: {fileID: 1279983781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2009428629
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,7 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1421844255}
   - component: {fileID: 1421844256}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2009428629
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 8250828531649490533}
   - component: {fileID: 6729917522618432027}
   - component: {fileID: 5911396337320402892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -254,8 +254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4e787aae159f84c8457e3b170576d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackDelay: 0
+  TargetDirection: {x: 0, y: 0}
   MovementSpeed: 4
-  Sprite: {fileID: 0}
   Rigidbody: {fileID: 0}
   MovementDirection: {x: 0, y: 0}
 --- !u!61 &8250828531649490533
@@ -335,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1058047360096129386}
   - component: {fileID: 8097597450574511254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StartingShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2879882916053538422}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6303829835900973660}
   - component: {fileID: 8176909987311413044}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StartingWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9122617920736941699}
   - component: {fileID: 5550049080508920827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +564,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2009428629
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1629356009, guid: 8344468f28bf12c4ca2a165141dd4bb3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -20,7 +20,6 @@ namespace Assets.Code.Scripts.Player {
 
         public void Equip(Item item) {
             if (item == null) { return; }
-            Debug.Log(item);
             switch (item.ItemType) {
                 case ItemType.Weapon:
                     if (this.Weapon != null) {

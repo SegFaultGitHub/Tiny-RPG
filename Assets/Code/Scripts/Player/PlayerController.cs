@@ -9,8 +9,7 @@ namespace Assets.Code.Scripts.Player {
         }
 
         public float AttackDelay;
-
-        private Player Player;
+        public Vector2 TargetDirection;
 
         [SerializeField] private float MovementSpeed;
         [SerializeField] private Rigidbody2D Rigidbody;
@@ -27,6 +26,7 @@ namespace Assets.Code.Scripts.Player {
             this.PlayerActions.PlayerControls.Enable();
 
             this.PlayerActions.PlayerControls.Move.performed += this.MoveInput;
+            this.PlayerActions.PlayerControls.Aim.performed += this.SetTargetDirectionInput;
             this.PlayerActions.PlayerControls.Move.canceled += this.MoveInput;
 
             this.PlayerActions.PlayerControls.Attack.started += this.AttackInput;
@@ -34,6 +34,7 @@ namespace Assets.Code.Scripts.Player {
 
         private void OnDisable() {
             this.PlayerActions.PlayerControls.Move.performed -= this.MoveInput;
+            this.PlayerActions.PlayerControls.Aim.performed += this.SetTargetDirectionInput;
             this.PlayerActions.PlayerControls.Move.canceled -= this.MoveInput;
 
             this.PlayerActions.PlayerControls.Attack.started -= this.AttackInput;
@@ -45,15 +46,19 @@ namespace Assets.Code.Scripts.Player {
             this.Move(context.ReadValue<Vector2>());
         }
 
+        private void SetTargetDirectionInput(InputAction.CallbackContext context) {
+            this.SetTargetDirection(context.ReadValue<Vector2>());
+        }
+
         private void AttackInput(InputAction.CallbackContext _) {
             this.Attack();
         }
         #endregion
 
         public void Start() {
-            this.Player = this.GetComponent<Player>();
             this.Animator = this.GetComponent<Animator>();
             this.Rigidbody = this.GetComponentInChildren<Rigidbody2D>();
+            this.TargetDirection = new(1, 0);
 
             if (this.transform.localScale.x > 0) {
                 this.Direction = PlayerDirection.Right;
@@ -68,15 +73,19 @@ namespace Assets.Code.Scripts.Player {
 
         private void Move(Vector2 direction) {
             this.MovementDirection = direction;
-            if (this.MovementDirection.x < -0.15f && this.Direction == PlayerDirection.Right && !this.Animator.GetBool("Flipping")) {
+            
+            this.Animator.SetBool("IsMoving", direction != Vector2.zero);
+        }
+
+        private void SetTargetDirection(Vector2 direction) {
+            this.TargetDirection = direction;
+            if (this.TargetDirection.x < 0 && this.Direction == PlayerDirection.Right && !this.Animator.GetBool("Flipping")) {
                 this.Direction = PlayerDirection.Left;
                 this.Animator.SetBool("Flipping", true);
-            } else if (this.MovementDirection.x > 0.15f && this.Direction == PlayerDirection.Left && !this.Animator.GetBool("Flipping")) {
+            } else if (this.TargetDirection.x > 0 && this.Direction == PlayerDirection.Left && !this.Animator.GetBool("Flipping")) {
                 this.Direction = PlayerDirection.Right;
                 this.Animator.SetBool("Flipping", true);
             }
-            
-            this.Animator.SetBool("IsMoving", direction != Vector2.zero);
         }
 
         private void Attack() {
