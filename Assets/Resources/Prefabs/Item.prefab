@@ -41,14 +41,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3648883152014813251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c0eaffdf87af944fa171c930554ff89, type: 3}
+  m_Script: {fileID: 11500000, guid: 354efbcb33218df4aae676e21b7c5971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Stats:
     Attributes: []
   Name: 
   Sprite: {fileID: 0}
-  Level: 17
+  ItemType: 0
+  Quality: 0
+  Level: 0
   WeaponSprites:
   - {fileID: -1248511376, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
   - {fileID: -350833998, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
@@ -65,3 +67,4 @@ MonoBehaviour:
   - {fileID: 2012163653, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
   - {fileID: 354810405, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
   Parent: {fileID: 0}
+  IsInitialized: 0

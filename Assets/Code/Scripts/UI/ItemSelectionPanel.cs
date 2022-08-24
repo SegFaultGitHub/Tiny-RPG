@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using System;
 using System.Collections;
 using UnityEngine.InputSystem;
+using Assets.Code.Scripts.Items;
 
-namespace Assets.Code.Scripts {
+namespace Assets.Code.Scripts.UI {
     public class ItemSelectionPanel : MonoBehaviour {
-        public Player Player;
+        public Player.Player Player;
         public Item CurrentItem, NewItem;
 
         public ItemPanel ItemPanelPrefab;

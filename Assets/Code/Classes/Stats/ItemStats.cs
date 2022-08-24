@@ -1,4 +1,4 @@
-﻿using Assets.Code.Scripts;
+﻿using Assets.Code.Scripts.Items;
 using System;
 
 namespace Assets.Code.Classes.Stats {

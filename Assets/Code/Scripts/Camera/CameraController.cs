@@ -1,7 +1,6 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Code.Scripts {
+namespace Assets.Code.Scripts.Camera {
     public class CameraController : MonoBehaviour {
         public static CameraController Instance;
 

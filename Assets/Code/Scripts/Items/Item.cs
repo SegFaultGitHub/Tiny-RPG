@@ -1,30 +1,28 @@
 ﻿using Assets.Code.Classes.Stats;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Assets.Code.Scripts {
+namespace Assets.Code.Scripts.Items {
     public enum Quality {
+        None = 0, // Default
         I,
         II,
         III,
-        IV,
-        None
+        IV
     }
-    public enum ItemType { 
+    public enum ItemType {
+        None = 0, // Default
         Weapon,
-        Shield,
-        None
+        Shield
     }
 
     public class Item : MonoBehaviour {
-        [SerializeField] public ItemStats Stats;
+        public ItemStats Stats;
         public string Name;
+        public Sprite Sprite;
+        public ItemType ItemType;
 
-        [HideInInspector] public Sprite Sprite;
-
-        [HideInInspector] public ItemType ItemType = ItemType.None;
-        [HideInInspector] public Quality Quality = Quality.None;
+        [HideInInspector] public Quality Quality;
         [HideInInspector] public int Level;
         [HideInInspector] public List<Sprite> WeaponSprites;
         [HideInInspector] public List<Sprite> ShieldSprites;
@@ -68,18 +66,6 @@ namespace Assets.Code.Scripts {
             this.name = this.Name;
 
             if (this.transform.parent == null) { this.transform.SetParent(this.Parent); }
-
-            //GameObject imageObject = new(this.Sprite.name);
-            //imageObject.transform.SetParent(this.transform);
-
-            //RectTransform rectTransform = imageObject.AddComponent<RectTransform>();
-            //rectTransform.localScale = new(1, 1);
-            //rectTransform.localRotation = new();
-            //rectTransform.anchoredPosition = new();
-            //rectTransform.sizeDelta = new(64, 64);
-
-            //Image image = imageObject.AddComponent<Image>();
-            //image.sprite = this.Sprite;
 
             this.IsInitialized = true;
         }

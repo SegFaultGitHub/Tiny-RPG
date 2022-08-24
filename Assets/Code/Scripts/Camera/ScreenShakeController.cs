@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Code.Scripts {
+namespace Assets.Code.Scripts.Camera {
     public class ScreenShakeController : MonoBehaviour {
 
         private float TimeRemaining;

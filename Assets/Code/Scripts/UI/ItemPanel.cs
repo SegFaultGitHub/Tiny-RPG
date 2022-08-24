@@ -1,11 +1,10 @@
 using Assets.Code.Classes.Stats;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Code.Scripts.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Code.Scripts {
+namespace Assets.Code.Scripts.UI {
     public class ItemPanel : MonoBehaviour {
         public Item Item;
 

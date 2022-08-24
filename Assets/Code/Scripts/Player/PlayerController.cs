@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Code.Scripts {
+namespace Assets.Code.Scripts.Player {
     public class PlayerController : MonoBehaviour {
         private enum PlayerDirection {
             Left, Right

@@ -1,4 +1,4 @@
-﻿using Assets.Code.Scripts;
+﻿using Assets.Code.Scripts.Items;
 using System;
 using System.Collections.Generic;
 
@@ -17,13 +17,11 @@ namespace Assets.Code.Classes.Stats {
         public AttributeType AttributeType;
         public float Value;
         public List<float> RawValues;
-        public bool SuperAttribute;
 
-        public Attribute(AttributeType attributeType, float value, bool superAttribute = false) {
+        public Attribute(AttributeType attributeType, float value) {
             this.AttributeType = attributeType;
             this.Value = value;
             this.RawValues = new() { this.Value };
-            this.SuperAttribute = superAttribute;
         }
 
         public void AddValue(float value) {

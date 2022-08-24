@@ -1,4 +1,6 @@
-﻿using Assets.Code.Scripts;
+﻿using Assets.Code.Scripts.Items;
+using Assets.Code.Scripts.Player;
+using Assets.Code.Scripts.UI;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -60,17 +62,6 @@ namespace Assets.Code.Temp {
 
             itemSelectionPanel.GetComponent<RectTransform>().localScale = new(1, 1, 1);
             itemSelectionPanel.GetComponent<RectTransform>().localPosition = new();
-
-            //this.ItemPanel.Item = newItem;
-            //this.ItemPanel.Parent = this.transform.parent;
-
-            //ItemPanel itemPanel1 = Instantiate(this.ItemPanel);
-            //RectTransform rectTransform1 = itemPanel1.transform.GetComponent<RectTransform>();
-            //rectTransform1.localPosition = new(0, 0);
-
-            //ItemPanel itemPanel2 = Instantiate(this.ItemPanel);
-            //RectTransform rectTransform2 = itemPanel2.transform.GetComponent<RectTransform>();
-            //rectTransform2.localPosition = new(500, 0);
         }
     }
 }

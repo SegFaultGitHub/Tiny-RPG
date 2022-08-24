@@ -1204,10 +1204,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6073330789627978795, guid: b6b0f6750119cfb41a0834d5a56d0142, type: 3}
+      propertyPath: Shield
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073330789627978795, guid: b6b0f6750119cfb41a0834d5a56d0142, type: 3}
+      propertyPath: Weapon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7904494068356793557, guid: b6b0f6750119cfb41a0834d5a56d0142, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8097597450574511254, guid: b6b0f6750119cfb41a0834d5a56d0142, type: 3}
+      propertyPath: Sprite
+      value: 
+      objectReference: {fileID: 2012163653, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
     - target: {fileID: 8113540433425885804, guid: b6b0f6750119cfb41a0834d5a56d0142, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1252,6 +1264,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8176909987311413044, guid: b6b0f6750119cfb41a0834d5a56d0142, type: 3}
+      propertyPath: Sprite
+      value: 
+      objectReference: {fileID: -1248511376, guid: 662bc68d9390c534ba182ee1566661de, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b0f6750119cfb41a0834d5a56d0142, type: 3}
 --- !u!1 &2036681955
