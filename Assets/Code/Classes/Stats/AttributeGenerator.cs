@@ -1,4 +1,4 @@
-﻿using Assets.Code.Scripts;
+﻿using Assets.Code.Scripts.Items;
 using System;
 using Random = UnityEngine.Random;
 
@@ -39,10 +39,10 @@ namespace Assets.Code.Classes.Stats {
 
         private static AttributeGenerator GetDefault(AttributeType attributeType) {
             return attributeType switch {
-                AttributeType.Strength => new(attributeType, 2f, 5, 60, 0.15f),
-                AttributeType.Wisdom => new(attributeType, 2f, 5, 60, 0.15f),
                 AttributeType.HealthPoint => new(attributeType, 1f, 25, 500, 0.2f),
                 AttributeType.ManaPoint => new(attributeType, 3f, 20, 300, 0.2f),
+                AttributeType.Strength => new(attributeType, 2f, 5, 60, 0.15f),
+                AttributeType.Wisdom => new(attributeType, 2f, 5, 60, 0.15f),
                 AttributeType.Luck => new(attributeType, 4f, 5, 40, 0.3f),
                 _ => throw new Exception("[AttributeGenerator:GetDefault] Unable to get default AttributeGenerator for Attribute " + attributeType + ".")
             };

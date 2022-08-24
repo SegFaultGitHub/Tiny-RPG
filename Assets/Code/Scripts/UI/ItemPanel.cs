@@ -1,11 +1,10 @@
 using Assets.Code.Classes.Stats;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Code.Scripts.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Code.Scripts {
+namespace Assets.Code.Scripts.UI {
     public class ItemPanel : MonoBehaviour {
         public Item Item;
 
@@ -16,10 +15,17 @@ namespace Assets.Code.Scripts {
         public Image ItemIcon;
 
         public TMP_Text HPText, HPValue;
+        public Image HPComparisonIcon;
         public TMP_Text MPText, MPValue;
+        public Image MPComparisonIcon;
         public TMP_Text StrengthText, StrengthValue;
+        public Image StrengthComparisonIcon;
         public TMP_Text WisdomText, WisdomValue;
+        public Image WisdomComparisonIcon;
         public TMP_Text LuckText, LuckValue;
+        public Image LuckComparisonIcon;
+
+        public Sprite BetterAttributeIcon, WorseAttributeIcon;
 
         public GameObject SelectBox;
         public GameObject KeepItemButton, TakeItemButton;
@@ -118,28 +124,48 @@ namespace Assets.Code.Scripts {
 
             if (hpDiff > 0) {
                 this.HPValue.color = new Color(0, 0.5f, 0);
+                this.HPComparisonIcon.sprite = this.BetterAttributeIcon;
+                this.HPComparisonIcon.gameObject.SetActive(true);
             } else if (hpDiff < 0) {
                 this.HPValue.color = new Color(0.5f, 0, 0);
+                this.HPComparisonIcon.sprite = this.WorseAttributeIcon;
+                this.HPComparisonIcon.gameObject.SetActive(true);
             }
             if (mpDiff > 0) {
                 this.MPValue.color = new Color(0, 0.5f, 0);
+                this.MPComparisonIcon.sprite = this.BetterAttributeIcon;
+                this.MPComparisonIcon.gameObject.SetActive(true);
             } else if (mpDiff < 0) {
                 this.MPValue.color = new Color(0.5f, 0, 0);
+                this.MPComparisonIcon.sprite = this.WorseAttributeIcon;
+                this.MPComparisonIcon.gameObject.SetActive(true);
             }
             if (strengthDiff > 0) {
                 this.StrengthValue.color = new Color(0, 0.5f, 0);
+                this.StrengthComparisonIcon.sprite = this.BetterAttributeIcon;
+                this.StrengthComparisonIcon.gameObject.SetActive(true);
             } else if (strengthDiff < 0) {
                 this.StrengthValue.color = new Color(0.5f, 0, 0);
+                this.StrengthComparisonIcon.sprite = this.WorseAttributeIcon;
+                this.StrengthComparisonIcon.gameObject.SetActive(true);
             }
             if (wisdomDiff > 0) {
                 this.WisdomValue.color = new Color(0, 0.5f, 0);
+                this.WisdomComparisonIcon.sprite = this.BetterAttributeIcon;
+                this.WisdomComparisonIcon.gameObject.SetActive(true);
             } else if (wisdomDiff < 0) {
                 this.WisdomValue.color = new Color(0.5f, 0, 0);
+                this.WisdomComparisonIcon.sprite = this.WorseAttributeIcon;
+                this.WisdomComparisonIcon.gameObject.SetActive(true);
             }
             if (luckDiff > 0) {
                 this.LuckValue.color = new Color(0, 0.5f, 0);
+                this.LuckComparisonIcon.sprite = this.BetterAttributeIcon;
+                this.LuckComparisonIcon.gameObject.SetActive(true);
             } else if (luckDiff < 0) {
                 this.LuckValue.color = new Color(0.5f, 0, 0);
+                this.LuckComparisonIcon.sprite = this.WorseAttributeIcon;
+                this.LuckComparisonIcon.gameObject.SetActive(true);
             }
         }
 

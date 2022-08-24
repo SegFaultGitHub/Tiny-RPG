@@ -1,6 +1,5 @@
 ﻿//This tool is a part of the VinTools Unity Package: https://vinarkgames.itch.io/vintools
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
