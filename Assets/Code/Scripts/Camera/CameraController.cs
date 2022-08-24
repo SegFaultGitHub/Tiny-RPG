@@ -20,8 +20,5 @@ namespace Assets.Code.Scripts.Camera {
                 this.transform.position = new(this.Target.position.x, this.Target.position.y, this.transform.position.z);
             }
         }
-        public void LateUpdate() {
-            
-        }
     }
 }

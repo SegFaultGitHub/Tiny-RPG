@@ -11,6 +11,9 @@ namespace Assets.Code.Scripts.Player {
         public float AttackDelay;
         public Vector2 TargetDirection;
 
+        // No input allowed
+        public bool Frozen = false;
+
         [SerializeField] private float MovementSpeed;
         [SerializeField] private Rigidbody2D Rigidbody;
         [SerializeField] private Vector2 MovementDirection;
@@ -33,6 +36,7 @@ namespace Assets.Code.Scripts.Player {
         }
 
         private void OnDisable() {
+            if (this.PlayerActions == null) { return; }
             this.PlayerActions.PlayerControls.Move.performed -= this.MoveInput;
             this.PlayerActions.PlayerControls.Aim.performed += this.SetTargetDirectionInput;
             this.PlayerActions.PlayerControls.Move.canceled -= this.MoveInput;
@@ -43,14 +47,17 @@ namespace Assets.Code.Scripts.Player {
         }
 
         private void MoveInput(InputAction.CallbackContext context) {
+            if (this.Frozen) { return; }
             this.Move(context.ReadValue<Vector2>());
         }
 
         private void SetTargetDirectionInput(InputAction.CallbackContext context) {
+            if (this.Frozen) { return; }
             this.SetTargetDirection(context.ReadValue<Vector2>());
         }
 
         private void AttackInput(InputAction.CallbackContext _) {
+            if (this.Frozen) { return; }
             this.Attack();
         }
         #endregion
@@ -73,12 +80,19 @@ namespace Assets.Code.Scripts.Player {
 
         private void Move(Vector2 direction) {
             this.MovementDirection = direction;
-            
+
             this.Animator.SetBool("IsMoving", direction != Vector2.zero);
         }
 
         private void SetTargetDirection(Vector2 direction) {
             this.TargetDirection = direction;
+        }
+
+        public void Update() {
+            this.AdjustPlayerDirection();
+        }
+
+        private void AdjustPlayerDirection() {
             if (this.TargetDirection.x < 0 && this.Direction == PlayerDirection.Right && !this.Animator.GetBool("Flipping")) {
                 this.Direction = PlayerDirection.Left;
                 this.Animator.SetBool("Flipping", true);

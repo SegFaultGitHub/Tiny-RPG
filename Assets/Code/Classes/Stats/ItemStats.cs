@@ -14,7 +14,7 @@ namespace Assets.Code.Classes.Stats {
         public void AddAttribute(Attribute newAttribute) {
             Attribute attribute = this.GetAttribute(newAttribute.AttributeType);
             if (attribute is null) {
-                this.Attributes.Add(newAttribute);
+                this.Attributes.Add(new(newAttribute.AttributeType, newAttribute.Value));
             } else {
                 attribute.AddValue(newAttribute.Value);
             }

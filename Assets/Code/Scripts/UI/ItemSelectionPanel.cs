@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine.InputSystem;
 using Assets.Code.Scripts.Items;
+using Assets.Code.Scripts.Player;
 
 namespace Assets.Code.Scripts.UI {
     public class ItemSelectionPanel : MonoBehaviour {

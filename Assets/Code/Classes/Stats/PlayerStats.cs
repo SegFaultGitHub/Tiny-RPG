@@ -8,7 +8,7 @@ namespace Assets.Code.Classes.Stats {
         public void AddAttribute(Attribute attribute) {
             Attribute _attribute = this.GetAttribute(attribute.AttributeType);
             if (_attribute == null) {
-                this.Attributes.Add(attribute);
+                this.Attributes.Add(new(attribute.AttributeType, attribute.Value));
             } else {
                 _attribute.Value += attribute.Value;
             }

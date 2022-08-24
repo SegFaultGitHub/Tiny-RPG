@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8173099859213416891}
   - component: {fileID: 8822087114184250903}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CollisionZone
-  m_TagString: Untagged
+  m_TagString: AttackTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7026662249031489935}
   - component: {fileID: 4099815206813850780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8859797625083426904}
   - component: {fileID: 7523461965236638340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

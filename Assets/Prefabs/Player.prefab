@@ -242,6 +242,7 @@ MonoBehaviour:
   StartingShield: {fileID: 8097597450574511254}
   WeaponSprite: {fileID: 1421844256}
   ShieldSprite: {fileID: 1279983781}
+  EnemiesInRange: []
 --- !u!114 &6782620573441461608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDelay: 0
   TargetDirection: {x: 0, y: 0}
+  Frozen: 0
   MovementSpeed: 4
   Rigidbody: {fileID: 0}
   MovementDirection: {x: 0, y: 0}
