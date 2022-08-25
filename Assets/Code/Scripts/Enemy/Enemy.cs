@@ -27,13 +27,17 @@ namespace Assets.Code.Scripts.Enemy {
 
         public void OnTriggerEnter2D(Collider2D collider) {
             if (collider.CompareTag("AttackTarget")) {
-                this.Player.EnemiesInRange.Add(this);
+                this.Player.EnemiesInAttackRange.Add(this);
+            } else if (collider.CompareTag("CastTarget")) {
+                this.Player.EnemiesInCastZone.Add(this);
             }
         }
 
         public void OnTriggerExit2D(Collider2D collider) {
             if (collider.CompareTag("AttackTarget")) {
-                this.Player.EnemiesInRange.Remove(this);
+                this.Player.EnemiesInAttackRange.Remove(this);
+            } else if (collider.CompareTag("CastTarget")) {
+                this.Player.EnemiesInCastZone.Remove(this);
             }
         }
 
@@ -71,6 +75,17 @@ namespace Assets.Code.Scripts.Enemy {
             Item item = Instantiate(prefab);
             item.name = "Dropped: " + item.Name;
             return item;
+        }
+
+        public void Die() {
+            Item item = this.GenerateLoot();
+            if (item != null) {
+                DroppedItem droppedItem = Resources.Load<DroppedItem>("Prefabs/DroppedItem");
+                droppedItem.Item = item;
+                droppedItem.Position = this.transform.position;
+                Instantiate(droppedItem);
+            }
+            Destroy(this.gameObject);
         }
 
         private float GetIncreasedLootRate() {

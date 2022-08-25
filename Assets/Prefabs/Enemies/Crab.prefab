@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a207220733174b48a6f93d7372bce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LootChance: 0.1
+  LootChance: 0.9
   Level: 9
   LootTable:
   - Weigth: 40

@@ -257,10 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDelay: 0
   TargetDirection: {x: 0, y: 0}
-  Frozen: 0
   MovementSpeed: 4
-  Rigidbody: {fileID: 0}
-  MovementDirection: {x: 0, y: 0}
 --- !u!61 &8250828531649490533
 BoxCollider2D:
   m_ObjectHideFlags: 0

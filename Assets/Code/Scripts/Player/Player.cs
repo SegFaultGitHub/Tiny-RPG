@@ -14,7 +14,8 @@ namespace Assets.Code.Scripts.Player {
         public Item StartingWeapon, StartingShield;
         public SpriteRenderer WeaponSprite, ShieldSprite;
 
-        public List<Enemy.Enemy> EnemiesInRange;
+        public List<Enemy.Enemy> EnemiesInAttackRange;
+        public List<Enemy.Enemy> EnemiesInCastZone;
 
         public IEnumerator Start() {
             yield return new WaitUntil(() => this.StartingWeapon.IsInitialized && this.StartingShield.IsInitialized);
@@ -47,16 +48,15 @@ namespace Assets.Code.Scripts.Player {
         }
 
         public void PerformAttack() {
-            this.EnemiesInRange.Where(enemy => this.Attack(enemy)).ToList().ForEach(enemy => {
-                Item item = enemy.GenerateLoot();
-                if (item != null) {
-                    DroppedItem droppedItem = Resources.Load<DroppedItem>("Prefabs/DroppedItem");
-                    droppedItem.Item = item;
-                    droppedItem.Position = enemy.transform.position;
-                    Instantiate(droppedItem);
-                }
-                Destroy(enemy.gameObject);
-            });
+            this.EnemiesInAttackRange.Where(enemy => this.Attack(enemy)).ToList().ForEach(enemy => enemy.Die());
+        }
+
+        public void PerformCast() {
+            this.EnemiesInCastZone.Where(enemy => this.Cast(enemy)).ToList().ForEach(enemy => enemy.Die());
+        }
+
+        private bool Cast(Enemy.Enemy enemy) {
+            return true;
         }
 
         private bool Attack(Enemy.Enemy enemy) {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,17 +12,19 @@ namespace Assets.Code.Scripts.Player {
         public float AttackDelay;
         public Vector2 TargetDirection;
 
-        // No input allowed
-        public bool Frozen = false;
-
         [SerializeField] private float MovementSpeed;
-        [SerializeField] private Rigidbody2D Rigidbody;
-        [SerializeField] private Vector2 MovementDirection;
+        private Rigidbody2D Rigidbody;
+        private Vector2 MovementDirection;
 
         private float LastAttack = float.MinValue;
         private PlayerActions PlayerActions;
         private Animator Animator;
         private PlayerDirection Direction;
+
+        private Player Player;
+
+        private AttackTarget AttackTarget;
+        private CastTarget CastTarget;
 
         #region Input
         private void OnEnable() {
@@ -33,36 +36,46 @@ namespace Assets.Code.Scripts.Player {
             this.PlayerActions.PlayerControls.Move.canceled += this.MoveInput;
 
             this.PlayerActions.PlayerControls.Attack.started += this.AttackInput;
+            this.PlayerActions.PlayerControls.Cast.started += this.CastStartInput;
+            this.PlayerActions.PlayerControls.Cast.canceled += this.CastEndInput;
         }
 
         private void OnDisable() {
-            if (this.PlayerActions == null) { return; }
             this.PlayerActions.PlayerControls.Move.performed -= this.MoveInput;
-            this.PlayerActions.PlayerControls.Aim.performed += this.SetTargetDirectionInput;
+            this.PlayerActions.PlayerControls.Aim.performed -= this.SetTargetDirectionInput;
             this.PlayerActions.PlayerControls.Move.canceled -= this.MoveInput;
 
             this.PlayerActions.PlayerControls.Attack.started -= this.AttackInput;
+            this.PlayerActions.PlayerControls.Cast.started -= this.CastStartInput;
+            this.PlayerActions.PlayerControls.Cast.canceled -= this.CastEndInput;
 
             this.PlayerActions.PlayerControls.Disable();
         }
 
         private void MoveInput(InputAction.CallbackContext context) {
-            if (this.Frozen) { return; }
             this.Move(context.ReadValue<Vector2>());
         }
 
         private void SetTargetDirectionInput(InputAction.CallbackContext context) {
-            if (this.Frozen) { return; }
             this.SetTargetDirection(context.ReadValue<Vector2>());
         }
 
         private void AttackInput(InputAction.CallbackContext _) {
-            if (this.Frozen) { return; }
             this.Attack();
+        }
+
+        private void CastStartInput(InputAction.CallbackContext _) {
+            this.CastStart();
+        }
+
+        private void CastEndInput(InputAction.CallbackContext _) {
+            this.CastEnd();
         }
         #endregion
 
         public void Start() {
+            this.AttackTarget = GameObject.FindGameObjectWithTag("AttackTarget").GetComponent<AttackTarget>();
+            this.Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             this.Animator = this.GetComponent<Animator>();
             this.Rigidbody = this.GetComponentInChildren<Rigidbody2D>();
             this.TargetDirection = new(1, 0);
@@ -85,7 +98,11 @@ namespace Assets.Code.Scripts.Player {
         }
 
         private void SetTargetDirection(Vector2 direction) {
-            this.TargetDirection = direction;
+            if (this.CastTarget != null) {
+                this.TargetDirection = this.CastTarget.transform.position - this.transform.position;
+            } else {
+                this.TargetDirection = direction;
+            }
         }
 
         public void Update() {
@@ -93,21 +110,45 @@ namespace Assets.Code.Scripts.Player {
         }
 
         private void AdjustPlayerDirection() {
-            if (this.TargetDirection.x < 0 && this.Direction == PlayerDirection.Right && !this.Animator.GetBool("Flipping")) {
-                this.Direction = PlayerDirection.Left;
-                this.Animator.SetBool("Flipping", true);
-            } else if (this.TargetDirection.x > 0 && this.Direction == PlayerDirection.Left && !this.Animator.GetBool("Flipping")) {
-                this.Direction = PlayerDirection.Right;
-                this.Animator.SetBool("Flipping", true);
+            if (this.CastTarget != null) {
+                if (this.CastTarget.transform.position.x < this.transform.position.x && this.Direction == PlayerDirection.Right && !this.Animator.GetBool("Flipping")) {
+                    this.Direction = PlayerDirection.Left;
+                    this.Animator.SetBool("Flipping", true);
+                } else if (this.CastTarget.transform.position.x > this.transform.position.x && this.Direction == PlayerDirection.Left && !this.Animator.GetBool("Flipping")) {
+                    this.Direction = PlayerDirection.Right;
+                    this.Animator.SetBool("Flipping", true);
+                }
+            } else {
+                if (this.TargetDirection.x < 0 && this.Direction == PlayerDirection.Right && !this.Animator.GetBool("Flipping")) {
+                    this.Direction = PlayerDirection.Left;
+                    this.Animator.SetBool("Flipping", true);
+                } else if (this.TargetDirection.x > 0 && this.Direction == PlayerDirection.Left && !this.Animator.GetBool("Flipping")) {
+                    this.Direction = PlayerDirection.Right;
+                    this.Animator.SetBool("Flipping", true);
+                }
             }
         }
 
         private void Attack() {
+            if (this.CastTarget != null) { return; }
             float now = Time.time;
             if (now - this.LastAttack > this.AttackDelay) {
                 this.Animator.SetTrigger("Attack");
                 this.LastAttack = now;
             }
+        }
+
+        private void CastStart() {
+            CastTarget prefab = Resources.Load<CastTarget>("Prefabs/CastTarget");
+            this.CastTarget = Instantiate(prefab);
+            this.CastTarget.transform.position = this.AttackTarget.transform.Find("Target").transform.position;
+            this.AttackTarget.gameObject.SetActive(false);
+        }
+
+        private void CastEnd() {
+            this.AttackTarget.gameObject.SetActive(true);
+            this.Player.PerformCast();
+            Destroy(this.CastTarget.gameObject);
         }
 
         public void Flip() {

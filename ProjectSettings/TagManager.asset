@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - AttackTarget
   - Canvas
+  - CastTarget
   layers:
   - Default
   - TransparentFX
