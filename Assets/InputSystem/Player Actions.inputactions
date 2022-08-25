@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "6e421132-ebac-406d-90c8-ef5fc0c5966b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Cast",
+                    "type": "Button",
+                    "id": "8add6c7f-4edb-4c9b-8f75-a7b8b4af7119",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -41,7 +59,7 @@
                     "id": "40fc2bfe-bf30-4d6a-a904-c5907e7b7516",
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone(min=0.125,max=0.925)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -52,7 +70,7 @@
                     "id": "55d35430-a44d-4613-be2e-5a5443943524",
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone(min=0.125,max=0.925)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -63,7 +81,7 @@
                     "id": "cab00e36-2323-4156-966b-a9bee3349ff1",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone(min=0.125,max=0.925)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -74,7 +92,7 @@
                     "id": "5ab33b5f-b54a-4666-8ab3-da9b62592929",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone(min=0.125,max=0.925)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -83,11 +101,77 @@
                 {
                     "name": "",
                     "id": "b55f1ce6-7701-4f78-a5be-57c89ec71010",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "c9f17529-c1cb-44f6-bdd3-948c64272537",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "1c7a2abe-2869-48b1-994e-5a604df3f10f",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "42e26378-7571-4756-b6c3-807e0211ff5d",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "19283e24-e5fa-40c5-8580-4b13423f02d5",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "d6c53193-0ae8-4a25-9eef-db88f172e483",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "354ca23c-756f-4975-b604-e1366607f54a",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cast",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

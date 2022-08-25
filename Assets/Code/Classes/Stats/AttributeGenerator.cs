@@ -4,14 +4,13 @@ using Random = UnityEngine.Random;
 
 namespace Assets.Code.Classes.Stats {
     public class AttributeGenerator {
-
-        private static readonly int MAX_LEVEL = 20;
-
         public AttributeType attribute;
         public float variation;
         public float minValue;
         public float maxValue;
         public float ratioVariation;
+
+        private static readonly int MAX_LEVEL = 20;
 
         public AttributeGenerator(AttributeType attribute, float variation, float minValue, float maxValue, float ratioVariation) {
             this.attribute = attribute;
